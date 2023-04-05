@@ -76,10 +76,10 @@ func Pubkeyaddress(versionedHash []byte) string {
 	pubaddress := "TS" + bip32.BitcoinBase58Encoding.EncodeToString(fullHash)
 	return pubaddress
 }
-func Checksum(payload []byte) []byte {
-	firstHash := sha256.Sum256(payload)
-	secondHash := sha256.Sum256(firstHash[:])
-	return secondHash[:4]
+// func Checksum(payload []byte) []byte {
+// 	firstHash := sha256.Sum256(payload)
+// 	secondHash := sha256.Sum256(firstHash[:])
+// 	return secondHash[:4]
 
 	// entropy, _ := bip39.NewEntropy(256)
 	// mnemonic, _ := bip39.NewMnemonic(entropy)
@@ -93,7 +93,7 @@ func Checksum(payload []byte) []byte {
 	// _, pubaddress := pubkeyhash(childpub.Key)
 	// //Return ChildPublic Address and Child Public Key
 	// return key{childkey, pubaddress}, nil
-}
+// }
 
 // func Checksum(masterkey *bip32.Key, index uint32) (key, error) {
 // 	// firstHash := sha256.Sum256(payload)
@@ -113,8 +113,8 @@ func Checksum(payload []byte) []byte {
 //		//Return ChildPublic Address and Child Public Key
 //		return key{childkey, pubaddress}, nil
 //	}
-func Error(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
+// func Error(e error) {
+// 	if e != nil {
+// 		panic(e)
+// 	}
+// }
