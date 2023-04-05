@@ -1,4 +1,4 @@
-package main
+package walletcreationn
 
 import (
 	"crypto/sha256"

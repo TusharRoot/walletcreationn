@@ -1,11 +1,11 @@
-package main
+package walletcreationn
 
 import (
 	"encoding/hex"
 	"fmt"
 )
 
-func main() {
+func d() {
 	mnemonic := "yard tissue turkey lucky unable cigar estate reflect manual food long uniform alley stumble error plate today dinner day render cabin artefact joy laptop"
 
 	keygen0, err := generate()
