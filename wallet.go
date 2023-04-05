@@ -19,7 +19,7 @@ type customerrors struct {
 	Code    int
 }
 
-func generate() (key, error) {
+func Generate() (key, error) {
 	entropy, _ := bip39.NewEntropy(256)
 	mnemonic, _ := bip39.NewMnemonic(entropy)
 	seed := bip39.NewSeed(mnemonic, "")
@@ -29,7 +29,7 @@ func generate() (key, error) {
 	childkey, err := masterkey.NewChildKey(0)
 	Error(err)
 	childpub := childkey.PublicKey()
-	_, pubaddress := pubkeyhash(childpub.Key)
+	_, pubaddress := Pubkeyhash(childpub.Key)
 	//Return ChildPublic Address and Child Public Key
 	return key{childkey, pubaddress}, nil
 }
@@ -37,7 +37,7 @@ func generate() (key, error) {
 func (e customerrors) Error() string {
 	return e.Message + " Error Code: " + strconv.Itoa(e.Code)
 }
-func generateWithIndex(mnemonic string, index uint32) (key, error) {
+func GenerateWithIndex(mnemonic string, index uint32) (key, error) {
 	if index > 10 {
 		return key{}, customerrors{"Index Must be less than 10", 10}
 	} else {
@@ -45,22 +45,22 @@ func generateWithIndex(mnemonic string, index uint32) (key, error) {
 		seed := bip39.NewSeed(mnemonic, "")
 		masterkey, err := bip32.NewMasterKey(seed)
 		Error(err)
-		return generatefromkey(masterkey, index)
+		return Generatefromkey(masterkey, index)
 	}
 }
-func generatefromkey(masterkey *bip32.Key, index uint32) (key, error) {
+func Generatefromkey(masterkey *bip32.Key, index uint32) (key, error) {
 	if index > 10 {
 		return key{}, customerrors{"Index Must be less than 10", 10}
 	} else {
 		childkey, err := masterkey.NewChildKey(index)
 		Error(err)
 		childpub := childkey.PublicKey()
-		_, pubaddress := pubkeyhash(childpub.Key)
+		_, pubaddress := Pubkeyhash(childpub.Key)
 		//Return ChildPublic Address and Child Public Key
 		return key{childkey, pubaddress}, nil
 	}
 }
-func pubkeyhash(key []byte) (string, string) {
+func Pubkeyhash(key []byte) (string, string) {
 	versionByte := byte(0x00)
 	shahash := sha256.Sum256(key)
 	hasher := ripemd160.New()
@@ -70,7 +70,7 @@ func pubkeyhash(key []byte) (string, string) {
 	versionedHash := append([]byte{versionByte}, hashBytes...)
 	return hashString, pubkeyaddress(versionedHash)
 }
-func pubkeyaddress(versionedHash []byte) string {
+func Pubkeyaddress(versionedHash []byte) string {
 	checksum := Checksum(versionedHash)
 	fullHash := append(checksum, versionedHash...)
 	pubaddress := "TS" + bip32.BitcoinBase58Encoding.EncodeToString(fullHash)
