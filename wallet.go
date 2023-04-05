@@ -76,13 +76,13 @@ func pubkeyaddress(versionedHash []byte) string {
 	pubaddress := "TS" + bip32.BitcoinBase58Encoding.EncodeToString(fullHash)
 	return pubaddress
 }
-// func Checksum(payload []byte) []byte {
-// 	firstHash := sha256.Sum256(payload)
-// 	secondHash := sha256.Sum256(firstHash[:])
-// 	return secondHash[:4]
-// }
-// func Error(e error) {
-// 	if e != nil {
-// 		panic(e)
-// 	}
-// }
+func Checksum(payload []byte) []byte {
+	firstHash := sha256.Sum256(payload)
+	secondHash := sha256.Sum256(firstHash[:])
+	return secondHash[:4]
+}
+func Error(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
