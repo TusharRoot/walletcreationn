@@ -1,4 +1,4 @@
-module github.com/TusharRoot/WalletCreationn
+module github.com/TusharRoot/Walletcreationn
 
 go 1.20
 
