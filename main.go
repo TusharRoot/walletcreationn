@@ -1,11 +1,11 @@
-package walletgo
+package main
 
 import (
 	"encoding/hex"
 	"fmt"
 )
 
-func d() {
+func main() {
 	mnemonic := "yard tissue turkey lucky unable cigar estate reflect manual food long uniform alley stumble error plate today dinner day render cabin artefact joy laptop"
 
 	keygen0, err := generate()
